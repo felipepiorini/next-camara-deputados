@@ -56,7 +56,6 @@ export default function Deputados() {
           ? deputados.map(function (item, i) {
               return (
                 <List
-                  sx={{ width: "100%", bgcolor: "background.paper" }}
                   key={item.id}
                 >
                   <ListItem alignItems="flex-start">
