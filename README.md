@@ -21,7 +21,6 @@ Para executar o site entre em
 ## Autores
 
 - [@felipepiorini](https://github.com/felipepiorini)
-- [@julliaip](https://github.com/julliaip)
 
 
 ## Licença
