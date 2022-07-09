@@ -1,34 +1,61 @@
+// React
+import * as React from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+
+// API
+import api from "../../services/v1";
+
+// MUI
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
 
 export default function DetalhesDeputado() {
   const router = useRouter();
-  const { id } = router.query;
+  const id = router.query.id;
+
+  const [deputado, setDeputado] = useState([]);
+  const [showLoading, setShowLoading] = useState(true);
+
+  useEffect(() => {
+    async function getItems() {
+      setShowLoading(true);
+      try {
+        if (id) {
+          await api
+            .get(`deputados/${id}`)
+            .then((response) => {
+              setDeputado(response.data.dados);
+              setShowLoading(false);
+            })
+            .catch((err) => {
+              console.error("ops! ocorreu um erro" + err);
+            });
+        }
+      } catch (error) {
+        console.log(error);
+        console.error("Ocorreu um erro ao buscar os items");
+      }
+    }
+    getItems();
+  }, [id]);
 
   return (
     <>
-      <List>
-        <ListItem>
-          <ListItemText primary=" - Com base na tela inicial criar a tela de detalhes mostrando mais informações do deputado" />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="- O parametro para filtrar o deputado ja esta nessa tela" />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary=" - Nesta tela deve conter a foto, nome, informaçoes de contato" />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary=" - Incluir botão para consultar despesas, frentes parlamentares e discursos" />
-        </ListItem>
-        <ListItem>
-          <ListItemText
-            primary=" Exibir aqui um card com os dados do deputado, rota
-            https://dadosabertos.camara.leg.br/api/v2/deputados/idDoDeputado"
-          />
-        </ListItem>
-      </List>
+      <Card sx={{ minWidth: 275 }}>
+        <CardContent>
+          <Avatar alt="Remy Sharp" src={deputado.ultimoStatus.urlFoto} />
+          <h3>{deputado.nomeCivil}</h3>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Despesas</Button>
+          <Button size="small">Discursos</Button>
+          <Button size="small">Frentes Parlamentares</Button>
+        </CardActions>
+      </Card>
     </>
   );
 }
