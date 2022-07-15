@@ -45,6 +45,7 @@ export default function DetalhesDeputado() {
 
   return (
     <>
+    {deputado ? 
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Avatar alt="Remy Sharp" src={deputado.ultimoStatus.urlFoto} />
@@ -56,6 +57,7 @@ export default function DetalhesDeputado() {
           <Button size="small">Frentes Parlamentares</Button>
         </CardActions>
       </Card>
+      : null}
     </>
   );
 }
