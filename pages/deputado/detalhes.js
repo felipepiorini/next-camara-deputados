@@ -52,7 +52,7 @@ export default function DetalhesDeputado() {
           <h3>{deputado.ultimoStatus?.siglaPartido}</h3>
         </CardContent>
         <CardActions>
-          <Button size="small">Despesas</Button>
+          <Button size="small" href={`despesas?id=${deputado.id}`}>Despesas</Button>
           <Button size="small">Discursos</Button>
           <Button size="small">Frentes Parlamentares</Button>
         </CardActions>
