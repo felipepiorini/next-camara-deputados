@@ -87,7 +87,7 @@ export default function DetalhesDeputado() {
               size="small"
               variant="outlined"
               color="success"
-              href={`despesas?id=${deputado.id}`}
+              href={`despesas?id=${deputado.id}&nomeDeputado=${deputado.nomeCivil}`}
             >
               Despesas
             </Button>

@@ -17,9 +17,13 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
+// Compoentes
+import ToolbarCustom from "../../componentes/toolbar";
+
 export default function DespesasDeputado() {
   const router = useRouter();
   const id = router.query.id;
+  const nomeDeputado = router.query.nomeDeputado;
 
   const [despesas, setDespesas] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
@@ -52,7 +56,10 @@ export default function DespesasDeputado() {
   };
 
   return (
-    <>
+    <React.Fragment>
+      <ToolbarCustom title="Despesas do deputado" nomeDeputado={nomeDeputado}/>
+
+      <br />
       {despesas && !showLoading
         ? despesas.map(function (item, i) {
             return (
@@ -92,6 +99,6 @@ export default function DespesasDeputado() {
             );
           })
         : ""}
-    </>
+  </React.Fragment>
   );
 }
