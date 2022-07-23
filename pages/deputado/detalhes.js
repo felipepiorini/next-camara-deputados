@@ -17,6 +17,9 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 
+// Compoentes
+import ToolbarCustom from "../../componentes/toolbar";
+
 export default function DetalhesDeputado() {
   const router = useRouter();
   const id = router.query.id;
@@ -48,59 +51,65 @@ export default function DetalhesDeputado() {
   }, [id]);
 
   return (
-    <Container fixed>
-      <Card variant="outlined" sx={{ minWidth: 275 }} key={deputado.id}>
-        <CardContent>
-          <Grid container>
-            <Grid md={2}>
-              <img alt="Remy Sharp" src={deputado.ultimoStatus?.urlFoto} />
+    <React.Fragment>
+      <ToolbarCustom title="Sobre o deputado" />
+
+      <br />
+
+      <Container fixed>
+        <Card variant="outlined" sx={{ minWidth: 275 }} key={deputado.id}>
+          <CardContent>
+            <Grid container>
+              <Grid md={2}>
+                <img style={{maxWidth: "120px"}} alt="Remy Sharp" src={deputado.ultimoStatus?.urlFoto} />
+              </Grid>
+              <Grid md={8}>
+                <h3>{deputado.nomeCivil}</h3>
+                <p>
+                  <b>Partido:</b> {deputado.ultimoStatus?.siglaPartido}/
+                  {deputado.ultimoStatus?.siglaUf} -{" "}
+                  {deputado.ultimoStatus?.email}
+                </p>
+                <p>
+                  <b>CPF:</b> {deputado.cpf}
+                </p>
+                <p>
+                  <b>Data Nascimento:</b>{" "}
+                  {deputado.dataNascimento
+                    ? Moment(deputado.dataNascimento).format("DD/MM/YYYY")
+                    : "Data não fornecida"}
+                </p>
+              </Grid>
             </Grid>
-            <Grid md={8}>
-              <h3>{deputado.nomeCivil}</h3>
-              <p>
-                <b>Partido:</b> {deputado.ultimoStatus?.siglaPartido}/
-                {deputado.ultimoStatus?.siglaUf} -{" "}
-                {deputado.ultimoStatus?.email}
-              </p>
-              <p>
-                <b>CPF:</b> {deputado.cpf}
-              </p>
-              <p>
-                <b>Data Nascimento:</b>{" "}
-                {deputado.dataNascimento
-                  ? Moment(deputado.dataNascimento).format("DD/MM/YYYY")
-                  : "Data não fornecida"}
-              </p>
-            </Grid>
-          </Grid>
-        </CardContent>
-        <CardActions>
-          <Button
-            size="small"
-            variant="outlined"
-            color="success"
-            href={`despesas?id=${deputado.id}`}
-          >
-            Despesas
-          </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            color="primary"
-            href={`discursos?id=${deputado.id}`}
-          >
-            Discursos
-          </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            color="secondary"
-            href={`frentes?id=${deputado.id}`}
-          >
-            Frentes Parlamentares
-          </Button>
-        </CardActions>
-      </Card>
-    </Container>
+          </CardContent>
+          <CardActions>
+            <Button
+              size="small"
+              variant="outlined"
+              color="success"
+              href={`despesas?id=${deputado.id}`}
+            >
+              Despesas
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              color="primary"
+              href={`discursos?id=${deputado.id}`}
+            >
+              Discursos
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              color="secondary"
+              href={`frentes?id=${deputado.id}`}
+            >
+              Frentes Parlamentares
+            </Button>
+          </CardActions>
+        </Card>
+      </Container>
+    </React.Fragment>
   );
 }

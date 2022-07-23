@@ -8,7 +8,6 @@ import api from "../services/v1";
 // MUI Componentes
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import AppBar from "@mui/material/AppBar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -17,7 +16,9 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ListItemButton from "@mui/material/ListItemButton";
 import CircularProgress from "@mui/material/CircularProgress";
-import Toolbar from "@mui/material/Toolbar";
+
+// Compoentes
+import ToolbarCustom from "../componentes/toolbar";
 
 export default function Deputados() {
   const [deputados, setDeputados] = useState([]);
@@ -44,20 +45,17 @@ export default function Deputados() {
   }, []);
 
   return (
-    <>
-      <AppBar position="static">
-        <Toolbar variant="dense">API Deputados</Toolbar>
-      </AppBar>
+    <React.Fragment>
+      <ToolbarCustom title="API Deputados" />
+
       <br />
       <Container fixed>
-       {showLoading && <CircularProgress /> }
+        {showLoading && <CircularProgress />}
 
         {deputados && !showLoading
           ? deputados.map(function (item, i) {
               return (
-                <List
-                  key={item.id}
-                >
+                <List key={item.id}>
                   <ListItem alignItems="flex-start">
                     <ListItemButton href={`deputado/detalhes?id=${item.id}`}>
                       <ListItemAvatar>
@@ -87,6 +85,6 @@ export default function Deputados() {
             })
           : ""}
       </Container>
-    </>
+    </React.Fragment>
   );
 }
