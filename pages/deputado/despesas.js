@@ -3,6 +3,9 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
+// LIBS
+import Moment from 'moment';
+
 // API
 import api from "../../services/v1";
 
@@ -68,7 +71,7 @@ export default function DespesasDeputado() {
                         </p>
                         <p>
                           <b>Tipo da despesa: </b>
-                          {item.tipoDespesa} - {item.dataDocumento}
+                          {item.tipoDespesa} - {item.dataDocumento ? Moment(item.dataDocumento).format('DD/MM/YYYY') : "Data não fornecida"} 
                         </p>
                         <p>
                           <b>R$: </b>
