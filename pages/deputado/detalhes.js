@@ -61,7 +61,11 @@ export default function DetalhesDeputado() {
           <CardContent>
             <Grid container>
               <Grid md={2}>
-                <img style={{maxWidth: "120px"}} alt="Remy Sharp" src={deputado.ultimoStatus?.urlFoto} />
+                <img
+                  style={{ maxWidth: "120px" }}
+                  alt="Remy Sharp"
+                  src={deputado.ultimoStatus?.urlFoto}
+                />
               </Grid>
               <Grid md={8}>
                 <h3>{deputado.nomeCivil}</h3>
