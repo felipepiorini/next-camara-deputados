@@ -8,14 +8,14 @@ import api from "../services/v1";
 // MUI Componentes
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import ListItemButton from "@mui/material/ListItemButton";
 import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 // Compoentes
 import ToolbarCustom from "../componentes/toolbar";
@@ -52,7 +52,7 @@ export default function Deputados() {
       <Container fixed>
         {showLoading && <CircularProgress />}
 
-        {deputados && !showLoading
+        {/* {deputados && !showLoading
           ? deputados.map(function (item, i) {
               return (
                 <List key={item.id}>
@@ -83,7 +83,42 @@ export default function Deputados() {
                 </List>
               );
             })
-          : ""}
+          : ""} */}
+
+        <Container sx={{ py: 8 }} maxWidth="md">
+          <Grid container spacing={4}>
+            {deputados.map((item) => (
+              <Grid item key={item.id} xs={12} sm={6} md={3}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <CardMedia component="img" image={item.urlFoto} />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {item.nome}
+                    </Typography>
+                    <Typography>
+                      {item.siglaPartido} / {item.siglaUf}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      href={`deputado/detalhes?id=${item.id}`}
+                    >
+                      Consultar
+                    </Button>
+                  </CardActions>
+                </Card>
+                <Box p={2}></Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </Container>
     </React.Fragment>
   );
